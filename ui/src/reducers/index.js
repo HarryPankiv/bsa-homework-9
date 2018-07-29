@@ -15,7 +15,8 @@ const byId = ( state = initialState.byId, action ) => {
 		case constants.ADD_MESSAGE_SUCCESS:
 			return {
 				...state,
-				[action.payload._id]: action.payload
+				[Object.values(action.payload)[0]._id]: Object.values(action.payload)[0],
+				[Object.values(action.payload)[1]._id]: Object.values(action.payload)[1]
 			}
 		case constants.UPDATE_MESSAGE_SUCCESS:
 		case constants.FETCH_MESSAGE_SUCCESS:
@@ -35,7 +36,7 @@ const all = ( state = initialState.all, action ) => {
 		case constants.DELETE_MESSAGE_SUCCESS:
 			return state.filter(id => id !== action.payload.id)
 		case constants.ADD_MESSAGE_SUCCESS:
-			return [...state, action.payload._id];
+			return [...state, Object.values(action.payload)[0]._id, Object.values(action.payload)[1]._id];
 		default :
 			return state
 	}

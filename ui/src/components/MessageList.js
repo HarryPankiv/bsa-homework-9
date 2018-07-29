@@ -6,6 +6,6 @@ export default ({ messages, onDelete }) =>
     messages && messages.map( (message, index) => (
         <Item key={index}>
             <Message>{message.text}</Message>
-            <Button onClick={ () => onDelete && onDelete(message._id)}>delet dis</Button>
+            <Button onClick={ () => onDelete && onDelete(message._id)}>delete this</Button>
         </Item>
     ))

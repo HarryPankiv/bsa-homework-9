@@ -1,6 +1,8 @@
 const express = require('express');
 const message = express.Router();
 const messageService = require('./message.service');
+const proxy = require('./message.proxy');
+const mongoose = require('mongoose');
 
 message.route('/')
 	.get((req, res) => {
@@ -15,15 +17,10 @@ message.route('/')
 	.post((req, res) => {
 		messageService.addMessage(req.body)
 			.then(message => {
-				console.log(message)
-				if(message.text.indexOf("@bot") === 0 ) {
-					// if (message.text)
-					res.send(message)
+				let answer = { _id: mongoose.Types.ObjectId(), text: proxy(message.text)}
+				messageService.addMessage(answer)
 
-				} else {
-					console.log(message)
-					res.send(message);
-				}
+				res.send([message, answer])
 			})
 			.catch(err => {
 				console.log(err);

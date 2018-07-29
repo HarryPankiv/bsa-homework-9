@@ -4,6 +4,7 @@ import { normalize } from 'normalizr';
 import { arrayOfMessages } from '../sagas/MessagesSchema';
 import * as constants from '../actions/constants';
 import { messageAPI } from '../api';
+import message from "../api/domains/message";
 
 function* fetchAllMessages() {
 	try {
